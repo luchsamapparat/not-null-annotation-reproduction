@@ -1,0 +1,45 @@
+openapi: 3.1.0
+info:
+  version: 1.0.0
+  title: NotNull Annotation Reproduction
+paths:
+  /:
+    get:
+      operationId: getInternetRecipe
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/InternetRecipe"
+components:
+  schemas:
+    InternetRecipe:
+      type: object
+      allOf:
+        - $ref: "#/components/schemas/Recipe"
+      properties:
+        url:
+          type: string
+      required:
+        - url
+    Recipe:
+      type: object
+      properties:
+        category:
+          oneOf:
+            - $ref: "#/components/schemas/Category"
+            - type: "null"
+      required:
+        - category
+    Category:
+      type: object
+      properties:
+        name:
+          type: string
+        slug:
+          type: string
+      required:
+        - name
+        - slug

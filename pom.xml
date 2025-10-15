@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project
+    xmlns="http://maven.apache.org/POM/4.0.0"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd"
+>
+    <modelVersion>4.0.0</modelVersion>
+
+    <groupId>com.acme</groupId>
+    <artifactId>not-null-annotation</artifactId>
+    <version>1.0.0-SNAPSHOT</version>
+
+    <properties>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    </properties>
+
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.openapitools</groupId>
+                <artifactId>openapi-generator-maven-plugin</artifactId>
+                <version>7.16.0</version>
+                <executions>
+                    <execution>
+                        <id>generate-notnull-annotation-reproduction</id>
+                        <goals>
+                            <goal>generate</goal>
+                        </goals>
+                        <configuration>
+                            <inputSpec>src/main/resources/openapi-spec.yaml</inputSpec>
+                            <output>${project.build.directory}/generated-sources/openapi</output>
+                            <addCompileSourceRoot>true</addCompileSourceRoot>
+                            <generateApiDocumentation>false</generateApiDocumentation>
+                            <generateApiTests>false</generateApiTests>
+                            <generateModelDocumentation>false</generateModelDocumentation>
+                            <generateModelTests>false</generateModelTests>
+                            <generatorName>spring</generatorName>
+                            <library>spring-boot</library>
+                            <configOptions>
+                                <useTags>true</useTags>
+                                <useSpringBoot3>true</useSpringBoot3>
+                                <apiPackage>com.acme.api</apiPackage>
+                                <modelPackage>com.acme.model</modelPackage>
+                                <interfaceOnly>true</interfaceOnly>
+                                <openApiNullable>true</openApiNullable>
+                            </configOptions>
+                            <templateDirectory>${project.basedir}/.openapi/templates/JavaSpring</templateDirectory>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+        </plugins>
+    </build>
+
+</project>
